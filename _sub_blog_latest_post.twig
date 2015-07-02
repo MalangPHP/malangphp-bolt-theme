@@ -1,0 +1,12 @@
+{% setcontent records = 'entry/latest/5' %}
+
+<h3 class="subtitle">Latest 3 Entries</h3>
+<ul>
+    {% for record in records %}
+    <li>
+        <a href="{{ record.link }}">{{ record.title }}</a>
+        <br>
+        <small>{{ record.user.displayname }}, {{ record.datepublished|date("M d, Y") }}</small>
+    </li>
+    {% endfor %}
+</ul>

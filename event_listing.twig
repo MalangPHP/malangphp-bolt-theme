@@ -1,0 +1,68 @@
+{% include '_head.twig' %}
+{% include '_sub_page_header.twig' %}
+
+<section class="page-title aleft">
+    <div class="mask mask-red">&nbsp;</div>
+        <div class="container">
+            <div class="col-md-6">
+                <h3>Event List</h3>
+            </div>
+            {{ menu('sub_event', '_menu_sub_contenttype.twig') }}
+        </div>
+</section>
+
+
+<section class="content row-fluid red" id="post">
+    <div class="container">
+        <div class="col-md-12">
+
+            <ul>
+                {% for record in records %}
+                    {% setcontent speaker = 'members' where {id : record.speaker} %}
+                    {% set event = get_event(record.event_id).event %}
+                    {% set event_attendees = get_event_attendee(record.event_id).attendees %}
+                    {% if (paths.current == '/upcoming/events' and event.status != "Completed") or (paths.current == '/past/events' and event.status == "Completed") %}
+                        <li>
+                            <h3 class="title">{{ event.title }}</h3>
+                            <div class="meta-pre">
+                                <span class="date">
+                                    <i class="fa fa-calendar"></i> {{ event.start_date|date("M d, Y") }}
+                                </span>
+                                <span class="time">
+                                    <i class="fa fa-clock-o"></i> {{ event.start_date|date("H:i") }}
+                                </span>
+                                <span class="place">
+                                    <i class="fa fa-map-marker"></i> {{ event.venue.name }}
+                                </span>
+
+                                <div class="pull-right aright rtrim-padding">
+                                    <span class="speakers">
+                                        <i class="fa fa-bullhorn"></i> Speakers: <a href="">{{ speaker.name }}</a>
+                                    </span>
+                                    <span class="attendant">
+                                        <i class="fa fa-users"></i> Current Attendance: <a href="">{{ event_attendees|length }} Person(s)</a>
+                                    </span>
+                                </div>
+                                <p class="desc">{{ event.description|striptags|raw }}</p>
+                                <div class="meta-post pull-right">
+                                    <span class="detail">
+                                        <i class="fa fa-search"></i> <a href="{{ record.link }}">View Detail</a>
+                                    </span>
+                                    {% if event.status != "Completed" %}
+                                    <span class="reservation">
+                                        <i class="fa fa-star"></i> <a href="{{ event.url }}">Reservation</a>
+                                    </span>
+                                    {% endif %}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+</section>
+
+{% include '_footer.twig' %}

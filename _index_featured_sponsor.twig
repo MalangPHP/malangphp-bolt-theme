@@ -1,0 +1,33 @@
+<section id="sponsors">
+    <div class="list row-fluid padding-lg">
+        <div class="container">
+            <div class="col-md-12">
+                <h1 class="title kerning-s uppercase">OUR LOVELY SPONSORS</h1>
+                <ul class="acenter">
+                    {% setcontent sponsors = 'sponsors/random/3' %}
+                    {% for item in sponsors %}
+                      <li><a href="{{ item.url }}"><img src="{{ image(item.image) }}" alt=""></a></li>
+                    {% endfor %}
+                </ul>
+                <a href="" class="btn btn-lg cta">View All Sponsors <i class="fa fa-long-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="offers row-fluid padding-lg">
+        <div class="container">
+            <h2>
+                Our goal is to grow the local community, search for new developers and spread knowledge and resources. <br>
+            </h2>
+            <br>
+            <p class="lead">
+                Malang is a very active technology center for the East Java, Indonesia, many companies and people from various countries have chosen this area to settle down and start their companies. PHP has a big role in this and for that reason we created a User Group focused on this area and in doing activities in english to acommodate all of these developers.
+            </p>
+            <p class="lead">
+                Want to show your love and concern for our community?
+            </p>
+            <br>
+            <a href="" class="btn btn-xlg cta"><i class="fa fa-heart"></i> Sponsor and Support Us!</a>
+            <!-- <a href="" class="btn btn-lg btn-red"><i class="fa fa-bullhorn"></i> Want to be a Speaker?</a> -->
+        </div>
+    </div>
+</section>

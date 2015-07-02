@@ -1,0 +1,41 @@
+{% include '_head.twig' %}
+{% include '_sub_page_header.twig' %}
+
+<section class="page-title aleft">
+    <div class="mask mask-purple">&nbsp;</div>
+        <div class="container">
+            <div class="col-md-6">
+                <h3>Members Directory</h3>
+            </div>
+            {{ menu('sub_member', '_menu_sub_contenttype.twig') }}
+        </div>
+</section>
+
+<section class="content row-fluid" id="team">
+    <div class="container">
+        {% if paths.current == '/organizers' %}
+            {% setcontent records = 'members' where { 'organizer' : 1 } allowpaging %}
+        {% endif %}
+
+        {% for item in records %}
+            <div class="col-md-4 acenter team-person">
+                <img src="http://www.gravatar.com/avatar/{{ md5(item.email) }}.png" alt="">
+                <div class="meta">
+                    <a href="/entries?uid={{ item.id }}" class="name">{{ item.name }}</a>
+                    <p class="desc">{{ item.skills|trim|upper }}</p>
+                    <ul class="social">
+                        {% if item.facebook is not empty %} <a href="https://facebook.com/{{ item.facebook }}" class="facebook"><i class="fa fa-facebook"></i></a> {% endif %}
+                        {% if item.twitter is not empty %} <a href="https://twitter.com/{{ item.twitter }}" class="twitter"><i class="fa fa-twitter"></i></a> {% endif %}
+                        {% if item.github is not empty %} <a href="https://github.com/{{ item.github }}" class="github"><i class="fa fa-github"></i></a> {% endif %}
+                        {% if item.website is not empty %} <a href="{{ item.website }}" class="github"><i class="fa fa-home"></i></a> {% endif %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+        {{ pager('', 10, '_sub_custom_pager.twig') }}
+    </div>
+</section>
+
+{% include '_footer.twig' %}

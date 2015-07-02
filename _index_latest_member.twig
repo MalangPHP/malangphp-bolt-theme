@@ -1,0 +1,52 @@
+<section id="speakers">
+    <div class="list row-fluid padding-lg">
+        <div class="container">
+            <div class="col-md-12">
+                <h1 class="title kerning-s uppercase">RECENTLY REGISTERED MEMBERS</h1>
+                    {% setcontent members = 'members/latest/3' %}
+
+                    <div class="row-fluid persons">
+                        {% for item in members %}
+                          <div class="col-md-4 row-fluid person">
+                              <div class="col-md-4 avatar">
+                                  <img src="http://www.gravatar.com/avatar/{{ md5(item.email) }}.png" alt="">
+                              </div>
+                              <div class="col-md-8 data aleft ltrim-padding">
+                                  <span class="name"><a href="/entries?uid={{ item.id }}">{{ item.name }}</a></span>
+                                  <span class="skills">{{ item.skills|trim|upper }}</span>
+                                  <span class="social">
+                                      {% if item.facebook is not empty %} <a href="https://facebook.com/{{ item.facebook }}" class="facebook"><i class="fa fa-facebook"></i></a> {% endif %}
+                                      {% if item.twitter is not empty %} <a href="https://twitter.com/{{ item.twitter }}" class="twitter"><i class="fa fa-twitter"></i></a> {% endif %}
+                                      {% if item.github is not empty %} <a href="https://github.com/{{ item.github }}" class="github"><i class="fa fa-github"></i></a> {% endif %}
+                                      {% if item.website is not empty %} <a href="{{ item.website }}" class="home"><i class="fa fa-home"></i></a> {% endif %}
+                                  </span>
+                              </div>
+                          </div>
+                        {% endfor %}
+                    </div>
+
+                    <a href="" class="btn btn-lg cta">View All Our Members <i class="fa fa-long-arrow-right"></i></a>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="offers row-fluid padding-lg">
+        <div class="container">
+            <h2>
+                Share your knowledge with the community!<br>
+            </h2>
+            <br>
+            <p class="lead">
+                Meetings need a few things. Our sponsors will cover the beers, you will cover the fun, but we also need a speaker to share his knowledge.
+            </p>
+            <p class="lead">
+                User Groups are the best place for you to start speaking, a first step toward entering the conference circuit. So if you have an idea that you would like to share, discuss and get people interested in, this is the place and we need to know it. We need a good solid register of interested speakers so that we can organize our meetings, so let us know what you would like to speak on and we will get you into a speaking slot.
+            </p>
+            <br>
+            <a href="" class="btn btn-xlg cta"><i class="fa fa-bullhorn"></i> Apply Here to be a Speaker!</a>
+            <!-- <a href="" class="btn btn-lg btn-red"><i class="fa fa-bullhorn"></i> Want to be a Speaker?</a> -->
+        </div>
+    </div>
+</section>

@@ -1,0 +1,69 @@
+
+{% form_theme form 'boltforms_custom.twig' %}
+
+{% if error and app.request.get(formname) %}
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Error!</strong> {{ error }}
+    </div>
+{% endif %}
+
+{% if message and app.request.get(formname) %}
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Error!</strong> {{ message }}
+    </div>
+{% endif %}
+
+{% if not sent %}
+
+    {{ html_pre }}
+
+    {% if recaptcha.enabled and recaptcha.theme|default('clean') %}
+    <script>
+        var RecaptchaOptions = {
+            theme : '{{ recaptcha.theme }}'
+        };
+    </script>
+    {% endif %}
+
+    {{ form_start(form, {'attr': {'name': formname}}) }}
+        {{ form_errors(form) }}
+
+        {% for key, value in fields  %}
+            {% if value.config.name != 'submit' %}
+            <div class="form-group">
+                {{ form_label(form[key]) }}
+                {{ form_errors(form[key]) }}
+                {{ form_widget(form[key]) }}
+            </div>
+            {% endif %}
+        {% endfor %}
+
+        {% if recaptcha.enabled %}
+
+            {% if not recaptcha.valid %}
+            <ul class="boltform-error">
+                <li class="boltform-errors">{{ recaptcha.error_message }}</li>
+            </ul>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="form_message" class="required">{{ recaptcha.label }}</label>
+                <script src="https://www.google.com/recaptcha/api.js?hl={{ htmllang() }}" async defer></script>
+                <div class="g-recaptcha" data-sitekey="{{ recaptcha.public_key }}"></div>
+            </div>
+
+        {% endif %}
+
+        <br>
+
+        <div class="form-group aright">
+            {{ form_row(form.submit) }}
+        </div>
+
+    {{ form_end(form) }}
+
+{% else %}
+    {{ html_post }}
+{% endif %}

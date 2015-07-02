@@ -1,0 +1,53 @@
+{% include '_head.twig' %}
+{% include '_sub_page_header.twig' %}
+
+<section class="page-title aleft">
+    <div class="mask mask-purple">&nbsp;</div>
+        <div class="container">
+            <div class="col-md-6">
+                <h3>About Us</h3>
+            </div>
+            {{ menu('sub_about', '_menu_sub_contenttype.twig') }}
+        </div>
+</section>
+
+
+<section class="content row-fluid" id="about">
+    <div class="container">
+        <!-- <div class="alert alert-info">This Page is Under Construction</div> -->
+
+        <div class="col-md-8">
+            <h3 class="subtitle">{{ record.title }}</h3>
+            <p class="lead">{{ record.body }}</p>
+
+            {{ boltforms('contact') }}
+        </div>
+        <div class="col-md-4" id="sidebar">
+            <h3 class="subtitle">Social Media</h3>
+            <ul>
+                <li>
+                    <a href="https://www.facebook.com/groups/mphug/">
+                        <i class="fa fa-facebook"></i> Facebook
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/malangphp">
+                        <i class="fa fa-twitter"></i> Twitter
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/malangphp">
+                        <i class="fa fa-github"></i> Github
+                    </a>
+                </li>
+                <li>
+                    <a href="http://malangdev.slack.com/">
+                        <i class="fa fa-slack"></i> Slack Channel
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+{% include '_footer.twig' %}

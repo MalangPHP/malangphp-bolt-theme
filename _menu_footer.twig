@@ -1,0 +1,10 @@
+<ul>
+    {% for item in menu %}
+      <li class="head uppercase">{{ item.label }}</li>
+      {% if item.submenu is defined %}
+        {% for item in item.submenu %}
+          <li><a href="{{ item.link }}">{% if item.class is defined %}<i class="{{ item.class }}"></i>{%endif%} {{ item.label }}</a></li>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+</ul>

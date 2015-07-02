@@ -1,0 +1,5 @@
+<div class="col-md-6 aright btn-area">
+    {% for item in menu %}
+        <a href="{{ item.link }}" {% if item|current %}class="active"{% endif %}>{{ item.label }}</a>
+    {% endfor %}
+</div>

@@ -1,0 +1,29 @@
+{% include '_head.twig' %}
+<div class="site-wrapper" id="hero">
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+
+            {% include '_index_header.twig' %}
+
+            <div class="inner cover">
+                <h1 class="cover-heading">Welcome to Malang PHP User Group</h1>
+                <!-- <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p> -->
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa aperiam cumque possimus ab, eum labore magnam ipsam, veritatis consequatur voluptas cupiditate autem maxime accusamus enim facilis iure? Nulla unde, repellat?</p>
+                <br>
+                <p class="lead">
+                    <a href="/upcoming/events" class="btn btn-xlg cta cta-event"><i class="fa fa-bullhorn"></i> Find Upcoming Meetups / Events</a>
+                    <a href="/entries" class="btn btn-xlg cta cta-blog"><i class="fa fa-leanpub"></i> Visit Our Blog</a>
+                </p>
+            </div> <!-- .inner.cover -->
+
+        </div> <!-- .cover-container -->
+    </div> <!-- .site-wrapper-inner -->
+</div> <!-- .site-wrapper -->
+
+{% include '_index_latest.twig' %}
+
+{% include '_index_featured_sponsor.twig' %}
+
+{% include '_index_latest_member.twig' %}
+
+{% include '_footer.twig' %}

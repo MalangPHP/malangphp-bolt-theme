@@ -1,0 +1,61 @@
+{% include '_head.twig' %}
+{% include '_sub_page_header.twig' %}
+
+<section class="page-title aleft">
+    <div class="mask mask-purple">&nbsp;</div>
+        <div class="container">
+            <div class="col-md-6">
+                <h3>News & Blog</h3>
+            </div>
+            <div class="col-md-6 aright btn-area">
+                <a href="/entries" class="active">Back to List</a>
+            </div>
+        </div>
+</section>
+
+<section class="content row-fluid purple" id="post">
+    <div class="container">
+        <div class="col-md-12" id="mainbar">
+
+            <ul>
+                <li>
+                    <h3 class="title">{{ record.title }}</h3>
+                    <div class="meta-pre">
+                        <span class="date">
+                            <i class="fa fa-calendar"></i>  {{ record.datepublished|date("M d, Y") }}
+                        </span>
+                        <span class="time">
+                            <i class="fa fa-clock-o"></i> {{ record.datepublished|date("H:i") }}
+                        </span>
+                        <span class="place">
+                            <i class="fa fa-user"></i> {{ record.user.displayname }}
+                        </span>
+
+                        <!-- <div class="pull-right aright rtrim-padding">
+                            <span class="speakers">
+                                <i class="fa fa-bullhorn"></i> Speakers: <a href="">Yuri Pratama</a>
+                            </span>
+                            <span class="attendant">
+                                <i class="fa fa-users"></i> Current Attendance: <a href="">10 Persons</a>
+                            </span>
+                        </div> -->
+                    </div>
+                    {{ record.body }}
+                    <div class="clearfix"></div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</section>
+
+<section class="content row-fluid" id="coc">
+    <div class="container">
+        <div class="col-md-12">
+
+            {{ record.body }}
+        </div>
+    </div>
+</section>
+
+{% include '_footer.twig' %}

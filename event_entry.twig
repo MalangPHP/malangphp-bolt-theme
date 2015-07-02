@@ -1,0 +1,88 @@
+{% include '_head.twig' %}
+{% include '_sub_page_header.twig' %}
+
+<section class="page-title aleft">
+    <div class="mask mask-red">&nbsp;</div>
+        <div class="container">
+            {% setcontent speaker = 'members' where {id : record.speaker} %}
+            {% set event = get_event(record.event_id).event %}
+            {% set event_attendees = get_event_attendee(record.event_id).attendees %}
+
+            <div class="col-md-6">
+                <h3>{{ record.title }}</h3>
+            </div>
+            <div class="col-md-6 aright btn-area">
+            <a href="{{ speaker.link }}" class="active"><i class="fa fa-bullhorn"></i> <strong>Speakers: </strong>{{ speaker.name }}</a>
+            {% if event.status != "Completed" %}
+                <a href="{{ event.url }}" class="active"><i class="fa fa-paper-plane"></i> Reserve Now</a>
+            {% else %}
+                <a href="{{ event.url }}"><i class="fa fa-close"></i> Completed</a>
+            {% endif %}
+                <!-- <a href="" class="active"><i class="fa fa-calendar"></i> June 27, 2015</a>
+                <a href="" class="active"><i class="fa fa-clock-o"></i> 08.00</a>
+                <a href="" class="active"><i class="fa fa-map-marker"></i> View Maps (Digital Lounge)</a> -->
+            </div>
+        </div>
+</section>
+
+
+<section class="content row-fluid red" id="post-detail">
+
+    <div id="meta" class="row-fluid">
+        <div class="container">
+           <ul>
+               <li class="col-md-2">
+                   <i class="fa fa-calendar"></i>
+                   <span>{{ event.start_date|date("M d, Y") }}</span>
+               </li>
+               <li class="col-md-2">
+                   <i class="fa fa-clock-o"></i>
+                   <span>{{ event.start_date|date("H:i") }}</span>
+               </li>
+               <li class="col-md-2">
+                   <i class="fa fa-map-marker"></i>
+                   <span>{{ event.venue.name }}</span>
+               </li>
+               <li class="col-md-2">
+                   <i class="fa fa-users"></i>
+                   <span>{{ event_attendees|length }} Attendance(s)</span>
+               </li>
+               <li class="col-md-2">
+                   <a href=""><i class="fa fa-photo"></i>
+                   <span>Gallery</span></a>
+               </li>
+               <li class="col-md-2">
+                   <a href=""><i class="fa fa-download"></i>
+                   <span>Download Slide</span></a>
+               </li>
+           </ul>
+        </div>
+    </div>
+
+
+    <div class="container" id="content">
+
+
+        <p class="desc">
+            {{ event.description|striptags|raw }}
+        </p>
+
+        <div id="attendance">
+            <h3 class="acenter">List Attendances</h3>
+            <ul>
+                {% for item in event_attendees|slice(0, 10) %}
+                <li><img src="http://www.gravatar.com/avatar/{{ md5(item.attendee.email) }}.png" alt=""></li>
+                {% endfor %}
+            </ul>
+            <div class="acenter">
+                {% if event.status != "Completed" %}
+                    <a href="{{ event.url }}" class="btn btn-xlg cta"><i class="fa fa-paper-plane"></i> Reserve Now (Remaining Tickets : {{ event.tickets[0].ticket.quantity_available - event_attendees|length}})</a>
+                {% else %}
+                <a href="{{ event.url }}" class="btn btn-xlg cta"><i class="fa fa-close"></i> Completed</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include '_footer.twig' %}

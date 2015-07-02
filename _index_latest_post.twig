@@ -1,0 +1,11 @@
+<div class="col-md-5 aleft" id="blog">
+    {% setcontent entries = 'entries/latest/1' %}
+    <h1 class="title kerning-s uppercase">Latest Blog Entry</h1>
+    {% for item in entries %}
+      <h3 class="title">{{ item.title }}</h3>
+      <span class="meta">{{ item.datepublish|date("M d, Y") }}</span>
+      <p class="lead">{{ item.body|excerpt(250) }}</p>
+      <a href="{{ item.link }}" class="btn btn-lg cta">Read More</a>
+    {% endfor %}
+
+</div>
