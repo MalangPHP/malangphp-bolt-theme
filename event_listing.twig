@@ -19,38 +19,34 @@
             <ul>
                 {% for record in records %}
                     {% setcontent speaker = 'members' where {id : record.speaker} %}
-                    {% set event = get_event(record.event_id).event %}
-                    {% set event_attendees = get_event_attendee(record.event_id).attendees %}
-                    {% if (paths.current == '/upcoming/events' and event.status != "Completed") or (paths.current == '/past/events' and event.status == "Completed") %}
+
+                    {% if (paths.current == '/upcoming/events' and record.completed != true) or (paths.current == '/past/events' and record.completed == true) %}
                         <li>
-                            <h3 class="title">{{ event.title }}</h3>
+                            <h3 class="title">{{ record.title }}</h3>
                             <div class="meta-pre">
                                 <span class="date">
-                                    <i class="fa fa-calendar"></i> {{ event.start_date|date("M d, Y") }}
+                                    <i class="fa fa-calendar"></i> {{ record.start_date|date("M d, Y") }}
                                 </span>
                                 <span class="time">
-                                    <i class="fa fa-clock-o"></i> {{ event.start_date|date("H:i") }}
+                                    <i class="fa fa-clock-o"></i> {{ record.start_date|date("H:i") }}
                                 </span>
                                 <span class="place">
-                                    <i class="fa fa-map-marker"></i> {{ event.venue.name }}
+                                    <i class="fa fa-map-marker"></i> {{ record.venue }}
                                 </span>
 
                                 <div class="pull-right aright rtrim-padding">
                                     <span class="speakers">
                                         <i class="fa fa-bullhorn"></i> Speakers: <a href="">{{ speaker.name }}</a>
                                     </span>
-                                    <span class="attendant">
-                                        <i class="fa fa-users"></i> Current Attendance: <a href="">{{ event_attendees|length }} Person(s)</a>
-                                    </span>
                                 </div>
-                                <p class="desc">{{ event.description|striptags|raw }}</p>
+                                <p class="desc">{{ record.description|striptags|raw }}</p>
                                 <div class="meta-post pull-right">
                                     <span class="detail">
                                         <i class="fa fa-search"></i> <a href="{{ record.link }}">View Detail</a>
                                     </span>
-                                    {% if event.status != "Completed" %}
+                                    {% if record.completed != true %}
                                     <span class="reservation">
-                                        <i class="fa fa-star"></i> <a href="{{ event.url }}">Reservation</a>
+                                        <i class="fa fa-star"></i> <a href="{{ record.reserveurl }}">Reserve Now!</a>
                                     </span>
                                     {% endif %}
                                 </div>
